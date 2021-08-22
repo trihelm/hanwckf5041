@@ -42,6 +42,7 @@ jobs:
         TNAME: K2P-USB-5.0
       run: |
         cd /opt/rt-n56u/trunk
+        ls -a
         if [ ! -f configs/templates/$TNAME.config ] ; then
         echo "configs/templates/$TNAME.config not found "
         exit 1
