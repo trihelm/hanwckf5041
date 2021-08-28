@@ -1,5 +1,5 @@
 #修改TNAME: K2P-5.0 中的K2P-5.0为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同.
-name: Build yk
+name: Build K2P
 
 on: 
   release:
@@ -8,7 +8,7 @@ on:
     tags:
        - 'v*'
     branches: 
-       - csbym
+       - csb
 #  schedule:
 #    - cron: 0 8 * * 5
  # watch:
@@ -41,7 +41,7 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: YK-L1
+        TNAME: K2P-USB-5.0
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
