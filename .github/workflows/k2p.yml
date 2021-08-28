@@ -1,6 +1,6 @@
 #修改TNAME: K2P-5.0 中的K2P-5.0为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同.
-name: Build k2p
 
+name: Build k2p
 on: 
   release:
     types: [published]
@@ -8,11 +8,7 @@ on:
     tags:
        - 'v*'
     branches: 
-       - master
-#  schedule:
-#    - cron: 0 8 * * 5
- # watch:
- #   types: [started]
+       - csbym
 
 jobs:
   build:
@@ -31,7 +27,9 @@ jobs:
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev gcc-multilib
     - name: Clone source code
       run: |
-        git clone --depth=1 https://github.com/trihelm/hanwckf5041.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/chongshengB/rt-n56u.git /opt/rt-n56u
+        wget https://raw.githubusercontent.com/hanwckf/rt-n56u/master/trunk/user/htop/htop-3.0.2.tar.gz
+        mv htop-3.0.2.tar.gz /opt/rt-n56u/trunk/user/htop/
         cd /opt/rt-n56u/toolchain-mipsel
         mkdir -p toolchain-3.4.x
         wget https://github.com/hanwckf/padavan-toolchain/releases/download/v1.0/mipsel-linux-uclibc.tar.xz
@@ -39,16 +37,14 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: K2P-USB-5.0
+        TNAME: K2P-USB-5.0.config
       run: |
         cd /opt/rt-n56u/trunk
-        ls -a configs/templates
         if [ ! -f configs/templates/$TNAME.config ] ; then
         echo "configs/templates/$TNAME.config not found "
         exit 1
         fi
         cp -f configs/templates/$TNAME.config .config
-
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
         #格式如下：
@@ -75,7 +71,11 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_MTR/d' .config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOCAT/d' .config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SRELAY/d' .config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER/d' .config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS/d' .config #删除配置项SS plus+
         
+        echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> 
+        echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_UVC=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_AUDIO=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_LPRD=n" >> .config
@@ -103,6 +103,8 @@ jobs:
         sudo ./clear_tree
         sudo ./build_firmware_modify $TNAME 0
         sudo mv -f images/*.trx /opt/images/
+        
+        #more .config
         # sudo ./clear_tree
         # sudo ./build_firmware_bkye $TNAME
         # sudo mv -f images/*.trx /opt/images/
