@@ -79,7 +79,7 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER/d' .config
 
 
-        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=y" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_UVC=n" >> .config
