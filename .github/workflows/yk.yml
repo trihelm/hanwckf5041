@@ -96,7 +96,7 @@ jobs:
         echo "CONFIG_FIRMWARE_ENABLE_XFS=n" >> .config        
         echo "CONFIG_FIRMWARE_ENABLE_EXT2=n" >> .config
         echo "CONFIG_FIRMWARE_ENABLE_EXT3=n" >> .config
-        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=y" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_UVC=n" >> .config
