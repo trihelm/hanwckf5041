@@ -79,8 +79,7 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER/d' .config
 
 
-        sed -i '/CONFIG_FIRMWARE_ENABLE_EXT2/d' .config
-        sed -i '/CONFIG_FIRMWARE_ENABLE_EXT3/d' .config
+
         sed -i '/CONFIG_FIRMWARE_ENABLE_XFS/d' .config        
         sed -i '/CONFIG_FIRMWARE_ENABLE_FUSE/d' .config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SERIAL/d' .config
@@ -96,9 +95,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SERIAL=n" >> .config
         echo "CONFIG_FIRMWARE_ENABLE_FUSE=n" >> .config
         echo "CONFIG_FIRMWARE_ENABLE_XFS=n" >> .config        
-        echo "CONFIG_FIRMWARE_ENABLE_EXT2=n" >> .config
-        echo "CONFIG_FIRMWARE_ENABLE_EXT3=n" >> .config
-        echo "CONFIG_FIRMWARE_ENABLE_EXT4_USE_FOR_EXT23=y" >> .config
+
 
         echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=y" >> .config
