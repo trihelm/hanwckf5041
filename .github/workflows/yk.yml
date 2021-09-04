@@ -8,7 +8,7 @@ on:
     tags:
        - 'v*'
     branches: 
-       - csb
+       - csb2333
 #  schedule:
 #    - cron: 0 8 * * 5
  # watch:
@@ -77,22 +77,7 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOCAT/d' .config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SRELAY/d' .config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER/d' .config
-        
-        sed -i '/CONFIG_FIRMWARE_ENABLE_XFS/d' .config        
-        sed -i '/CONFIG_FIRMWARE_ENABLE_FUSE/d' .config
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_SERIAL/d' .config
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_RPL2TP/d' .config
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_HTTPS/d' .config
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE/d' .config
-        
-        
-        
-        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n" >> .config
-        echo "CONFIG_FIRMWARE_INCLUDE_HTTPS=n" >> .config
-        echo "CONFIG_FIRMWARE_INCLUDE_RPL2TP=n" >> .config
-        echo "CONFIG_FIRMWARE_INCLUDE_SERIAL=n" >> .config
-        echo "CONFIG_FIRMWARE_ENABLE_FUSE=n" >> .config
-        echo "CONFIG_FIRMWARE_ENABLE_XFS=n" >> .config        
+
 
         echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=y" >> .config
