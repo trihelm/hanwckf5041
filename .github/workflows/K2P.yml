@@ -77,11 +77,17 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOCAT/d' .config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SRELAY/d' .config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER/d' .config   
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_XUPNPD/d' .config
+
+        
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_XUPNPD/d' .config        
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_PARTED/d' .config   
         
         
 
         echo "CONFIG_FIRMWARE_INCLUDE_XUPNPD=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_PARTED=n" >> .config
+        
+        
         echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=y" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config
@@ -115,6 +121,12 @@ jobs:
         sed -i '/chinadns-ng/d' Makefile
         sed -i '/lua51/d' Makefile
         sed -i '/ipt2socks/d' Makefile
+        sed -i '/chnroute/d' Makefile
+        sed -i '/p910nd/d' Makefile
+        sed -i '/comgt-0.32/d' Makefile
+        sed -i '/usb-modeswitch/d' Makefile
+        sed -i '/uqmi/d' Makefile
+        
         cd ..
         #########################################################################################        
         
