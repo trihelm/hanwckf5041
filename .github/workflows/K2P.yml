@@ -126,6 +126,9 @@ jobs:
         sed -i '/comgt-0.32/d' Makefile
         sed -i '/usb-modeswitch/d' Makefile
         sed -i '/uqmi/d' Makefile
+        sed -i '/optware/d' Makefile
+        sed -i '/optware/d' Makefile
+        
         
         cd ..
         #########################################################################################        
