@@ -100,14 +100,7 @@ jobs:
         #sed -i '/自定义项/d' .config
         #echo "自定义项=y" >> .config
         #########################################################################################        
-
-        cd /opt/rt-n56u/trunk/user
-        sed -i '/microsocks/d' Makefile
-        sed -i '/chinadns-ng/d' Makefile
-        sed -i '/lua51/d' Makefile
-        sed -i '/ipt2socks/d' Makefile
-        cd ../
-        #########################################################################################  
+ 
         sudo ./clear_tree
         sudo ./build_firmware_modify $TNAME 0
         sudo mv -f images/*.trx /opt/images/
