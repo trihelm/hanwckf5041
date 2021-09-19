@@ -81,7 +81,8 @@ jobs:
         
         #sed -i '/CONFIG_FIRMWARE_INCLUDE_XUPNPD/d' .config        
         #sed -i '/CONFIG_FIRMWARE_INCLUDE_PARTED/d' .config   
-        
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_MINIDLNA/d' .config
+        echo "CONFIG_FIRMWARE_INCLUDE_MINIDLNA=y" >> .config        
         
 
         #echo "CONFIG_FIRMWARE_INCLUDE_XUPNPD=n" >> .config
