@@ -8,7 +8,7 @@ on:
     tags:
        - 'v*'
     branches: 
-       - csb2333
+       - csb
 #  schedule:
 #    - cron: 0 8 * * 5
   watch:
