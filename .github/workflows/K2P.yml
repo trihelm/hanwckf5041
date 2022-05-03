@@ -72,7 +72,6 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOCAT/d' .config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SRELAY/d' .config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER/d' .config   
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_ARIA/d' .config 
 
 
         #sed -i '/CONFIG_FIRMWARE_INCLUDE_XUPNPD/d' .config        
@@ -80,14 +79,14 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_MINIDLNA/d' .config
         echo "CONFIG_FIRMWARE_INCLUDE_MINIDLNA=y" >> .config        
         
-        #sed -i '/CONFIG_FIRMWARE_INCLUDE_ARIA=n" >> .config
+
         #echo "CONFIG_FIRMWARE_INCLUDE_XUPNPD=n" >> .config
         #echo "CONFIG_FIRMWARE_INCLUDE_PARTED=n" >> .config
-        
-        
-        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=y" >> .config
-        echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=y" >> .config
-        echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_SSOBFS=y" >> .config #simple-obfs混淆插件
+        echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_UVC=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_AUDIO=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_LPRD=n" >> .config
@@ -109,25 +108,33 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_MTR=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_SOCAT=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_SRELAY=n" >> .config
+        
+        echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=n" >> .config #adbyby plus+
+        echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=n" >> .config #KP广告过滤
+        echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config #adg DNS去AD
+        echo "CONFIG_FIRMWARE_INCLUDE_CADDY=n" >> .config #在线文件管理服务
+        echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config #集成caddu执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
+        echo "CONFIG_FIRMWARE_INCLUDE_WYY=n" >> .config #网易云解锁
+        echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=n" >> .config #网易云解锁GO版本执行文件（2M多）注意固件超大小
+        echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n" >> .config #zerotier ~1.3M
+        echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config #aliddns
+        echo "CONFIG_FIRMWARE_INCLUDE_FRPC=n" >> .config #frpc
+        echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config #frps
+        echo "CONFIG_FIRMWARE_INCLUDE_NPC=n" >> .config #npc 
+        
         #sed -i '/自定义项/d' .config
         #echo "自定义项=y" >> .config
         #########################################################################################
  
-        cd user
-        #sed -i '/microsocks/d' Makefile
-        #sed -i '/chinadns-ng/d' Makefile
-        #sed -i '/lua51/d' Makefile
-        #sed -i '/ipt2socks/d' Makefile
-        #sed -i '/chnroute/d' Makefile
-        #sed -i '/p910nd/d' Makefile
-        #sed -i '/comgt-0.32/d' Makefile
-        #sed -i '/usb-modeswitch/d' Makefile
-        #sed -i '/uqmi/d' Makefile
-        #sed -i '/optware/d' Makefile
-        #sed -i '/optware/d' Makefile
+        cd /opt/rt-n56u/trunk/configs/boards/K2P-USB
+        sed -i '/# CONFIG_RT2880_DRAM_128M is not set/d' kernel-3.4.x-5.0.config
+        echo "# CONFIG_RT2880_DRAM_128M=y" >> kernel-3.4.x-5.0.config
+        sed -i '/CONFIG_RT2880_DRAM_512M=y/d' kernel-3.4.x-5.0.config
+        echo "CONFIG_RT2880_DRAM_512M is not set" >> kernel-3.4.x-5.0.config
+        sed -i '/CONFIG_RALINK_RAM_SIZE=512/d' kernel-3.4.x-5.0.config
+        echo "CONFIG_RALINK_RAM_SIZE=128" >> kernel-3.4.x-5.0.config       
         
-        
-        cd ..
+        cd /opt/rt-n56u/trunk
         #########################################################################################        
         
         sudo ./clear_tree
