@@ -33,7 +33,7 @@ jobs:
       run: |
         git clone --depth=1 https://github.com/etion2008/rt-n56u.git /opt/rt-n56u
         wget https://raw.githubusercontent.com/hanwckf/rt-n56u/master/trunk/user/htop/htop-3.0.2.tar.gz
-        mv htop-3.0.2.tar.gz /opt/rt-n56u/trunk/user/htop/
+        #mv htop-3.0.2.tar.gz /opt/rt-n56u/trunk/user/htop/
         cd /opt/rt-n56u/toolchain-mipsel
         mkdir -p toolchain-3.4.x
         wget https://github.com/hanwckf/padavan-toolchain/releases/download/v1.0/mipsel-linux-uclibc.tar.xz
