@@ -32,7 +32,7 @@ jobs:
     - name: Clone source code
       run: |
         git clone --depth=1 https://github.com/etion2008/rt-n56u.git /opt/rt-n56u
-        cd toolchain-mipsel
+        cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
     - name: Build Firmware
       env:
