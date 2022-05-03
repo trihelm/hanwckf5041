@@ -85,7 +85,7 @@ jobs:
         #echo "CONFIG_FIRMWARE_INCLUDE_PARTED=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config
-        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=y" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_SSOBFS=n" >> .config #simple-obfs混淆插件
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_UVC=n" >> .config
@@ -139,7 +139,7 @@ jobs:
         #########################################################################################        
         
         sudo ./clear_tree
-        sudo ./build_firmware_modify $TNAME 0
+        sudo ./build_firmware_ci $TNAME 0
         sudo mv -f images/*.trx /opt/images/
         
         #more .config
