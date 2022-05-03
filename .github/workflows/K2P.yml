@@ -8,7 +8,7 @@ on:
     tags:
        - 'v*'
     branches: 
-       - csb
+       - en
 #  schedule:
 #    - cron: 0 8 * * 5
  # watch:
@@ -31,7 +31,7 @@ jobs:
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev gcc-multilib
     - name: Clone source code
       run: |
-        git clone --depth=1 https://github.com/chongshengB/rt-n56u.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/etion2008/rt-n56u.git /opt/rt-n56u
         wget https://raw.githubusercontent.com/hanwckf/rt-n56u/master/trunk/user/htop/htop-3.0.2.tar.gz
         mv htop-3.0.2.tar.gz /opt/rt-n56u/trunk/user/htop/
         cd /opt/rt-n56u/toolchain-mipsel
@@ -89,9 +89,9 @@ jobs:
         #echo "CONFIG_FIRMWARE_INCLUDE_PARTED=n" >> .config
         
         
-        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config
-        echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config
-        echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=y" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=y" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_UVC=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_AUDIO=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_LPRD=n" >> .config
