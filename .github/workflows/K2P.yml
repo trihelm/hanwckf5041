@@ -117,7 +117,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_WYY=n" >> .config #网易云解锁
         echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=n" >> .config #网易云解锁GO版本执行文件（2M多）注意固件超大小
         echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n" >> .config #zerotier ~1.3M
-        echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config #aliddns
+        echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=n" >> .config #aliddns
         echo "CONFIG_FIRMWARE_INCLUDE_FRPC=n" >> .config #frpc
         echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config #frps
         echo "CONFIG_FIRMWARE_INCLUDE_NPC=n" >> .config #npc 
