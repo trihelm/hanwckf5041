@@ -1,0 +1,193 @@
+#修改TNAME: K2P-5.0 中的K2P-5.0为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同.
+name: Build K2-en
+
+on: 
+  release:
+    types: [published]
+  push:
+    tags:
+       - 'v*'
+    branches: 
+       - en
+#  schedule:
+#    - cron: 0 8 * * 5
+ # watch:
+ #   types: [started]
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    - name: Initialization environment
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        sudo apt-get update
+        sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd \
+        cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
+        pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev gcc-multilib libev-dev
+    - name: Clone source code
+      run: |
+        git clone --depth=1 https://github.com/etion2008/rt-n56u.git /opt/rt-n56u        
+        sh /opt/rt-n56u/trunk/tools/shellcheck.sh
+        cd /opt/rt-n56u/toolchain-mipsel
+        sh dl_toolchain.sh
+    - name: Build Firmware
+      env:
+        TNAME: PSG1218_nano
+      run: |
+        cd /opt/rt-n56u/trunk
+        if [ ! -f configs/templates/$TNAME.config ] ; then
+        echo "configs/templates/$TNAME.config not found "
+        exit 1
+        fi
+
+        #########################################################################################
+        #基础模板
+        cd /opt/rt-n56u/trunk/configs/templates  
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_UVC/d' $TNAME.config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_AUDIO/d' $TNAME.config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_LPRD/d' $TNAME.config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_U2EC/d' $TNAME.config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_TCPDUMP/d' $TNAME.config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_FTPD/d' $TNAME.config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_DOGCOM/d' $TNAME.config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_MINIEAP/d' $TNAME.config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_NJIT_CLIENT/d' $TNAME.config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_NAPT66/d' $TNAME.config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SSSERVER/d' $TNAME.config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_TTYD/d' $TNAME.config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_LRZSZ/d' $TNAME.config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_HTOP/d' $TNAME.config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_NANO/d' $TNAME.config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_IPERF3/d' $TNAME.config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_DUMP1090/d' $TNAME.config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_RTL_SDR/d' $TNAME.config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_MTR/d' $TNAME.config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SOCAT/d' $TNAME.config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SRELAY/d' $TNAME.config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_MINIDLNA/d' $TNAME.config
+        #sed -i '/CONFIG_FIRMWARE_INCLUDE_XUPNPD/d' $TNAME.config        
+        #sed -i '/CONFIG_FIRMWARE_INCLUDE_PARTED/d' $TNAME.config           
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SMBD36=y/d' $TNAME.config  
+
+        echo "CONFIG_FIRMWARE_INCLUDE_SMBD36=n" >> $TNAME.config
+        echo "CONFIG_FIRMWARE_INCLUDE_UVC=n" >> $TNAME.config
+        echo "CONFIG_FIRMWARE_INCLUDE_AUDIO=n" >> $TNAME.config
+        echo "CONFIG_FIRMWARE_INCLUDE_LPRD=n" >> $TNAME.config
+        echo "CONFIG_FIRMWARE_INCLUDE_U2EC=n" >> $TNAME.config
+        echo "CONFIG_FIRMWARE_INCLUDE_TCPDUMP=n" >> $TNAME.config
+        echo "CONFIG_FIRMWARE_INCLUDE_FTPD=n" >> $TNAME.config
+        echo "CONFIG_FIRMWARE_INCLUDE_DOGCOM=n" >> $TNAME.config
+        echo "CONFIG_FIRMWARE_INCLUDE_MINIEAP=n" >> $TNAME.config
+        echo "CONFIG_FIRMWARE_INCLUDE_NJIT_CLIENT=n" >> $TNAME.config
+        echo "CONFIG_FIRMWARE_INCLUDE_NAPT66=n" >> $TNAME.config
+        echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=n" >> $TNAME.config
+        echo "CONFIG_FIRMWARE_INCLUDE_TTYD=n" >> $TNAME.config
+        echo "CONFIG_FIRMWARE_INCLUDE_LRZSZ=n" >> $TNAME.config
+        echo "CONFIG_FIRMWARE_INCLUDE_HTOP=n" >> $TNAME.config
+        echo "CONFIG_FIRMWARE_INCLUDE_NANO=n" >> $TNAME.config
+        echo "CONFIG_FIRMWARE_INCLUDE_IPERF3=n" >> $TNAME.config
+        echo "CONFIG_FIRMWARE_INCLUDE_DUMP1090=n" >> $TNAME.config
+        echo "CONFIG_FIRMWARE_INCLUDE_RTL_SDR=n" >> $TNAME.config
+        echo "CONFIG_FIRMWARE_INCLUDE_MTR=n" >> $TNAME.config
+        echo "CONFIG_FIRMWARE_INCLUDE_SOCAT=n" >> $TNAME.config
+        echo "CONFIG_FIRMWARE_INCLUDE_SRELAY=n" >> $TNAME.config
+        echo "CONFIG_FIRMWARE_INCLUDE_MINIDLNA=y" >> $TNAME.config          
+        #echo "CONFIG_FIRMWARE_INCLUDE_XUPNPD=n" >> $TNAME.config
+        #echo "CONFIG_FIRMWARE_INCLUDE_PARTED=n" >> $TNAME.config
+
+
+        #########################################################################################
+        #编译文件modify
+        cd /opt/rt-n56u/trunk
+        cp -f configs/templates/$TNAME.config .config
+        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config/d' build_firmware_modify
+        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=y" >> .config/d' build_firmware_modify
+        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=y" >> .config/d' build_firmware_modify
+        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_SSOBFS=y" >> .config/d' build_firmware_modify
+        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config/d' build_firmware_modify
+        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=y" >> .config/d' build_firmware_modify
+        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> .config/d' build_firmware_modify
+        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=y" >> .config/d' build_firmware_modify
+        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_CADDY=y" >> .config/d' build_firmware_modify
+        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config/d' build_firmware_modify 
+        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_WYY=y" >> .config/d' build_firmware_modify
+        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=n" >> .config/d' build_firmware_modify
+        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=y" >> .config/d' build_firmware_modify
+        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config/d' build_firmware_modify
+        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_FRPC=y" >> .config/d' build_firmware_modify
+        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config/d' build_firmware_modify
+        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_NPC=y" >> .config/d' build_firmware_modify
+
+        ##科学上网        ##
+        echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #科学上网插件，选择n后全部有关插件都不集成
+        echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config #集成v2ray执行文件，如果不集成，会从网上下载下来执行，不影响正常使用
+        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=y" >> .config #集成trojan执行文件，如果不集成，会从网上下载下来执行，不影响正常使用
+        echo "CONFIG_FIRMWARE_INCLUDE_SSOBFS=y" >> .config #simple-obfs混淆插件
+        ##科学上网        ##
+
+        ##广告管理        ##
+        echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=n" >> .config #adbyby plus+
+        echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=n" >> .config #KP广告过滤
+        ##广告管理        ##
+
+        ##DNS服务        ##
+        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config #smartdns
+        echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config #adg DNS去AD
+
+        ##DNS服务        ##
+
+        ##文件管理        ##
+        echo "CONFIG_FIRMWARE_INCLUDE_CADDY=n" >> .config #在线文件管理服务
+        echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config #集成caddu执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
+        ##文件管理        ##
+
+        ##音乐解锁        ##
+        echo "CONFIG_FIRMWARE_INCLUDE_WYY=n" >> .config #网易云解锁
+        echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=n" >> .config #网易云解锁GO版本执行文件（2M多）注意固件超大小
+        ##音乐解锁        ##
+
+        ##内网穿透服务        ##
+        echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n" >> .config #zerotier ~1.3M
+        echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=n" >> .config #aliddns
+        echo "CONFIG_FIRMWARE_INCLUDE_FRPC=n" >> .config #frpc
+        echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config #frps
+        echo "CONFIG_FIRMWARE_INCLUDE_NPC=n" >> .config #npc
+        ##内网穿透服务        ##
+        #########################################################################################
+ 
+        cd /opt/rt-n56u/trunk/configs/boards/K2P-USB
+        sed -i '/# CONFIG_RT2880_DRAM_128M is not set/d' kernel-3.4.x-5.0.config
+        echo "CONFIG_RT2880_DRAM_128M=y" >> kernel-3.4.x-5.0.config
+        sed -i '/CONFIG_RT2880_DRAM_512M=y/d' kernel-3.4.x-5.0.config
+        echo "# CONFIG_RT2880_DRAM_512M is not set" >> kernel-3.4.x-5.0.config
+        sed -i '/CONFIG_RALINK_RAM_SIZE=512/d' kernel-3.4.x-5.0.config
+        echo "CONFIG_RALINK_RAM_SIZE=128" >> kernel-3.4.x-5.0.config       
+        
+        sed -i '466i # CONFIG_NF_CONNTRACK_CHAIN_EVENTS is not set' /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config
+        sed -i '1906i # CONFIG_RT_SECOND_IF_MT7915 is not set' /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config
+        sed -i '1913i # CONFIG_RT_THIRD_IF_MT7915 is not set' /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config
+        
+        cd /opt/rt-n56u/trunk
+        #cp -f configs/templates/$TNAME.config .config
+        #########################################################################################        
+        
+        mkdir -p /opt/images/
+        sudo ./clear_tree
+        sudo ./build_firmware_modify $TNAME 0
+        sudo mv -f images/*.trx /opt/images/
+        
+        #more .config
+        # sudo ./clear_tree
+        # sudo ./build_firmware_bkye $TNAME
+        # sudo mv -f images/*.trx /opt/images/
+    - name : Upload packages
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: Padavan-packages
+        path: /opt/images
