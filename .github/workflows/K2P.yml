@@ -32,7 +32,6 @@ jobs:
     - name: Clone source code
       run: |
         git clone --depth=1 https://github.com/etion2008/rt-n56u.git /opt/rt-n56u
-        sed '466i # CONFIG_NF_CONNTRACK_CHAIN_EVENTS is not set' /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config
         sh /opt/rt-n56u/trunk/tools/shellcheck.sh
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
@@ -167,8 +166,7 @@ jobs:
         sed -i '/CONFIG_RALINK_RAM_SIZE=512/d' kernel-3.4.x-5.0.config
         echo "CONFIG_RALINK_RAM_SIZE=128" >> kernel-3.4.x-5.0.config       
         
-        echo /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config
-        make oldconfig
+        sed '466i # CONFIG_NF_CONNTRACK_CHAIN_EVENTS is not set' /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config
         
         cd /opt/rt-n56u/trunk
         #cp -f configs/templates/$TNAME.config .config
