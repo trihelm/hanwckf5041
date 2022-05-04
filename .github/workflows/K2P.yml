@@ -1,5 +1,5 @@
 #修改TNAME: K2P-5.0 中的K2P-5.0为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同.
-name: Build K2P
+name: Build K2P-en
 
 on: 
   release:
@@ -102,6 +102,7 @@ jobs:
         #########################################################################################
         #编译文件modify
         cd /opt/rt-n56u/trunk
+        cp -f configs/templates/$1.config .config
         sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config/d' build_firmware_modify
         sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=y" >> .config/d' build_firmware_modify
         sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=y" >> .config/d' build_firmware_modify
@@ -121,39 +122,39 @@ jobs:
         sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_NPC=y" >> .config/d' build_firmware_modify
 
         ##科学上网        ##
-        echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> build_firmware_modify #科学上网插件，选择n后全部有关插件都不集成
-        echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> build_firmware_modify #集成v2ray执行文件，如果不集成，会从网上下载下来执行，不影响正常使用
-        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> build_firmware_modify #集成trojan执行文件，如果不集成，会从网上下载下来执行，不影响正常使用
-        echo "CONFIG_FIRMWARE_INCLUDE_SSOBFS=n" >> build_firmware_modify #simple-obfs混淆插件
+        echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #科学上网插件，选择n后全部有关插件都不集成
+        echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config #集成v2ray执行文件，如果不集成，会从网上下载下来执行，不影响正常使用
+        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config #集成trojan执行文件，如果不集成，会从网上下载下来执行，不影响正常使用
+        echo "CONFIG_FIRMWARE_INCLUDE_SSOBFS=n" >> .config #simple-obfs混淆插件
         ##科学上网        ##
 
         ##广告管理        ##
-        echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=n" >> build_firmware_modify #adbyby plus+
-        echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=n" >> build_firmware_modify #KP广告过滤
+        echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=n" >> .config #adbyby plus+
+        echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=n" >> .config #KP广告过滤
         ##广告管理        ##
 
         ##DNS服务        ##
-        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> build_firmware_modify #smartdns
-        echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> build_firmware_modify #adg DNS去AD
+        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config #smartdns
+        echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config #adg DNS去AD
 
         ##DNS服务        ##
 
         ##文件管理        ##
-        echo "CONFIG_FIRMWARE_INCLUDE_CADDY=n" >> build_firmware_modify #在线文件管理服务
-        echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> build_firmware_modify #集成caddu执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
+        echo "CONFIG_FIRMWARE_INCLUDE_CADDY=n" >> .config #在线文件管理服务
+        echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config #集成caddu执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
         ##文件管理        ##
 
         ##音乐解锁        ##
-        echo "CONFIG_FIRMWARE_INCLUDE_WYY=n" >> build_firmware_modify #网易云解锁
-        echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=n" >> build_firmware_modify #网易云解锁GO版本执行文件（2M多）注意固件超大小
+        echo "CONFIG_FIRMWARE_INCLUDE_WYY=n" >> .config #网易云解锁
+        echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=n" >> .config #网易云解锁GO版本执行文件（2M多）注意固件超大小
         ##音乐解锁        ##
 
         ##内网穿透服务        ##
-        echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n" >> build_firmware_modify #zerotier ~1.3M
-        echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=n" >> build_firmware_modify #aliddns
-        echo "CONFIG_FIRMWARE_INCLUDE_FRPC=n" >> build_firmware_modify #frpc
-        echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> build_firmware_modify #frps
-        echo "CONFIG_FIRMWARE_INCLUDE_NPC=n" >> build_firmware_modify #npc
+        echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n" >> .config #zerotier ~1.3M
+        echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=n" >> .config #aliddns
+        echo "CONFIG_FIRMWARE_INCLUDE_FRPC=n" >> .config #frpc
+        echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config #frps
+        echo "CONFIG_FIRMWARE_INCLUDE_NPC=n" >> .config #npc
         ##内网穿透服务        ##
         #########################################################################################
  
