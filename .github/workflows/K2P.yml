@@ -159,15 +159,14 @@ jobs:
         #########################################################################################
  
         cd /opt/rt-n56u/trunk/configs/boards/K2P-USB
-        sed -i '/# CONFIG_RT2880_DRAM_128M is not set/d' kernel-3.4.x-5.0.config
+        sed -i '/# CONFIG_RT2880_DRAM_128M is not set/d' >> kernel-3.4.x-5.0.config
         echo "CONFIG_RT2880_DRAM_128M=y" >> kernel-3.4.x-5.0.config
-        sed -i '/CONFIG_RT2880_DRAM_512M=y/d' kernel-3.4.x-5.0.config
+        sed -i '/CONFIG_RT2880_DRAM_512M=y/d' >> kernel-3.4.x-5.0.config
         echo "# CONFIG_RT2880_DRAM_512M is not set" >> kernel-3.4.x-5.0.config
-        sed -i '/CONFIG_RALINK_RAM_SIZE=512/d' kernel-3.4.x-5.0.config
+        sed -i '/CONFIG_RALINK_RAM_SIZE=512/d' >> kernel-3.4.x-5.0.config
         echo "CONFIG_RALINK_RAM_SIZE=128" >> kernel-3.4.x-5.0.config       
         
-        cd /opt/rt-n56u/trunk/configs/boards/YK-L1
-        sed '466i # CONFIG_NF_CONNTRACK_CHAIN_EVENTS is not set' >> kernel-3.4.x.config         
+        sudo sed '466i # CONFIG_NF_CONNTRACK_CHAIN_EVENTS is not set' >> /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config         
         echo "$(</opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config)"
         
         cd /opt/rt-n56u/trunk
