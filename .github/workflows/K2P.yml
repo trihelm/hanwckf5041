@@ -102,7 +102,7 @@ jobs:
         #########################################################################################
         #编译文件modify
         cd /opt/rt-n56u/trunk
-        #cp -f configs/templates/$TNAME.config .config
+        cp -f configs/templates/$TNAME.config .config
         sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config/d' build_firmware_modify
         sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=y" >> .config/d' build_firmware_modify
         sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=y" >> .config/d' build_firmware_modify
@@ -125,7 +125,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #科学上网插件，选择n后全部有关插件都不集成
         echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config #集成v2ray执行文件，如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=y" >> .config #集成trojan执行文件，如果不集成，会从网上下载下来执行，不影响正常使用
-        echo "CONFIG_FIRMWARE_INCLUDE_SSOBFS=y" >> .config #simple-obfs混淆插件
+        echo "CONFIG_FIRMWARE_INCLUDE_SSOBFS=n" >> .config #simple-obfs混淆插件
         ##科学上网        ##
 
         ##广告管理        ##
@@ -167,7 +167,7 @@ jobs:
         echo "CONFIG_RALINK_RAM_SIZE=128" >> kernel-3.4.x-5.0.config       
         
         cd /opt/rt-n56u/trunk
-        cp -f configs/templates/$TNAME.config .config
+        #cp -f configs/templates/$TNAME.config .config
         #########################################################################################        
         
         mkdir -p /opt/images/
