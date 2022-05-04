@@ -171,7 +171,7 @@ jobs:
         
         mkdir -p /opt/images/
         sudo ./clear_tree
-        sudo ./build_firmware_modify $TNAME 0
+        sudo ./build_firmware_modify $TNAME 1
         sudo mv -f images/*.trx /opt/images/
         
         #more .config
