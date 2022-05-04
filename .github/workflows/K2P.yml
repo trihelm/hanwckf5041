@@ -168,6 +168,7 @@ jobs:
         
         sed -i '466i # CONFIG_NF_CONNTRACK_CHAIN_EVENTS is not set' /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config
         sed -i '1906i # CONFIG_RT_SECOND_IF_MT7915 is not set' /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config
+        sed -i '1913i # CONFIG_RT_THIRD_IF_MT7915 is not set' /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config
         echo "$(</opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config)"
         
         cd /opt/rt-n56u/trunk
