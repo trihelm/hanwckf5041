@@ -102,7 +102,7 @@ jobs:
         #########################################################################################
         #编译文件modify
         cd /opt/rt-n56u/trunk
-        cp -f configs/templates/$1.config .config
+        cp -f configs/templates/$TNAME.config .config
         sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config/d' build_firmware_modify
         sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=y" >> .config/d' build_firmware_modify
         sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=y" >> .config/d' build_firmware_modify
@@ -172,7 +172,7 @@ jobs:
         
         mkdir -p /opt/images/
         sudo ./clear_tree
-        sudo ./build_firmware_modify $TNAME 1
+        sudo ./build_firmware_modify $TNAME
         sudo mv -f images/*.trx /opt/images/
         
         #more .config
