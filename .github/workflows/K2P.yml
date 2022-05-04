@@ -168,6 +168,8 @@ jobs:
         echo "CONFIG_RALINK_RAM_SIZE=128" >> kernel-3.4.x-5.0.config       
         
         echo /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config
+        make oldconfig
+        
         cd /opt/rt-n56u/trunk
         #cp -f configs/templates/$TNAME.config .config
         #########################################################################################        
