@@ -2,12 +2,17 @@
 name: Build yk-vb
 
 on:
+  push:
+    tags:
+       - 'v*'
+    branches: 
+       - vb
   repository_dispatch:
   workflow_dispatch:
     inputs:
       ssh:
         description: 'SSH connection to Actions'
-        required: 'false'
+        required: false
         default: 'false'
 
 jobs:
