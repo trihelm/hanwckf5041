@@ -1,23 +1,22 @@
 #修改TNAME: K2P-5.0 中的K2P-5.0为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同.
-name: Build yk-vb
+name: Build K2P-vb
 
-on:
+on: 
+  release:
+    types: [published]
   push:
     tags:
        - 'v*'
     branches: 
-       - vb
-  repository_dispatch:
-  workflow_dispatch:
-    inputs:
-      ssh:
-        description: 'SSH connection to Actions'
-        required: false
-        default: 'false'
+       - en
+#  schedule:
+#    - cron: 0 8 * * 5
+ # watch:
+ #   types: [started]
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
 
     steps:
     - name: Checkout
@@ -32,19 +31,20 @@ jobs:
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev gcc-multilib libev-dev
     - name: Clone source code
       run: |
-        git clone --depth=1 https://github.com/vb1980/Padavan-KVR.git /opt/rt-n56u        
+        git clone --depth=1 https://github.com/etion2008/rt-n56u.git /opt/rt-n56u        
         sh /opt/rt-n56u/trunk/tools/shellcheck.sh
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
     - name: Build Firmware
       env:
-        TNAME: YK-L1
+        TNAME: K2P-USB
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
         echo "configs/templates/$TNAME.config not found "
         exit 1
         fi
+
         #########################################################################################
         #基础模板
         cd /opt/rt-n56u/trunk/configs/templates  
@@ -70,13 +70,12 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOCAT/d' $TNAME.config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SRELAY/d' $TNAME.config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_MINIDLNA/d' $TNAME.config
+        #sed -i '/CONFIG_FIRMWARE_INCLUDE_XUPNPD/d' $TNAME.config        
+        #sed -i '/CONFIG_FIRMWARE_INCLUDE_PARTED/d' $TNAME.config           
         sed -i '/CONFIG_FIRMWARE_INCLUDE_ARIA/d' $TNAME.config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL/d' $TNAME.config
 
-        #sed -i '/CONFIG_FIRMWARE_INCLUDE_XUPNPD/d' $TNAME.config        
-        #sed -i '/CONFIG_FIRMWARE_INCLUDE_PARTED/d' $TNAME.config           
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_SMBD36=y/d' $TNAME.config  
-        echo "CONFIG_FIRMWARE_INCLUDE_SMBD36=n" >> $TNAME.config
+
         echo "CONFIG_FIRMWARE_INCLUDE_UVC=n" >> $TNAME.config
         echo "CONFIG_FIRMWARE_INCLUDE_AUDIO=n" >> $TNAME.config
         echo "CONFIG_FIRMWARE_INCLUDE_LPRD=n" >> $TNAME.config
@@ -102,7 +101,7 @@ jobs:
         #echo "CONFIG_FIRMWARE_INCLUDE_XUPNPD=n" >> $TNAME.config
         #echo "CONFIG_FIRMWARE_INCLUDE_PARTED=n" >> $TNAME.config
         echo "CONFIG_FIRMWARE_INCLUDE_ARIA=n" >> $TNAME.config          
-        echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=n" >> $TNAME.config          
+        echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=n" >> $TNAME.config   
 
         #########################################################################################
         #编译文件modify
@@ -125,28 +124,35 @@ jobs:
         sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_FRPC=y" >> .config/d' build_firmware_modify
         sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config/d' build_firmware_modify
         sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_NPC=y" >> .config/d' build_firmware_modify
+
         ##科学上网        ##
         echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #科学上网插件，选择n后全部有关插件都不集成
         echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config #集成v2ray执行文件，如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config #集成trojan执行文件，如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_XRAY=y" >> .config #simple-obfs混淆插件
         ##科学上网        ##
+
         ##广告管理        ##
         echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=n" >> .config #adbyby plus+
         echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=n" >> .config #KP广告过滤
         ##广告管理        ##
+
         ##DNS服务        ##
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config #smartdns
         echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config #adg DNS去AD
+
         ##DNS服务        ##
+
         ##文件管理        ##
         echo "CONFIG_FIRMWARE_INCLUDE_CADDY=n" >> .config #在线文件管理服务
         echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config #集成caddu执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
         ##文件管理        ##
+
         ##音乐解锁        ##
         echo "CONFIG_FIRMWARE_INCLUDE_WYY=n" >> .config #网易云解锁
         echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=n" >> .config #网易云解锁GO版本执行文件（2M多）注意固件超大小
         ##音乐解锁        ##
+
         ##内网穿透服务        ##
         echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n" >> .config #zerotier ~1.3M
         echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=n" >> .config #aliddns
@@ -167,6 +173,7 @@ jobs:
         sed -i '466i # CONFIG_NF_CONNTRACK_CHAIN_EVENTS is not set' /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config
         sed -i '1906i # CONFIG_RT_SECOND_IF_MT7915 is not set' /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config
         sed -i '1913i # CONFIG_RT_THIRD_IF_MT7915 is not set' /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config
+        echo "$(</opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config)"
         
         cd /opt/rt-n56u/trunk
         #cp -f configs/templates/$TNAME.config .config
@@ -187,3 +194,4 @@ jobs:
       with:
         name: Padavan-packages
         path: /opt/images
+
