@@ -16,7 +16,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
 
     steps:
     - name: Checkout
@@ -31,7 +31,7 @@ jobs:
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev gcc-multilib libev-dev
     - name: Clone source code
       run: |
-        git clone --depth=1 https://github.com/etion2008/rt-n56u.git /opt/rt-n56u        
+        git clone --depth=1 https://github.com/vb1980/Padavan-KVR.git /opt/rt-n56u        
         sh /opt/rt-n56u/trunk/tools/shellcheck.sh
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
