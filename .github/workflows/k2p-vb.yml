@@ -100,8 +100,8 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_MINIDLNA=y" >> $TNAME.config          
         #echo "CONFIG_FIRMWARE_INCLUDE_XUPNPD=n" >> $TNAME.config
         #echo "CONFIG_FIRMWARE_INCLUDE_PARTED=n" >> $TNAME.config
-        echo "CONFIG_FIRMWARE_INCLUDE_ARIA=n" >> $TNAME.config          
-        echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=n" >> $TNAME.config   
+        echo "CONFIG_FIRMWARE_INCLUDE_ARIA=y" >> $TNAME.config          
+        echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=y" >> $TNAME.config   
 
         #########################################################################################
         #编译文件modify
