@@ -176,7 +176,7 @@ jobs:
         #echo "$(</opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config)"
         #sed -i '42i \		mv $(THISDIR)/bin/xray /opt/images/' /opt/rt-n56u/trunk/user/xray/Makefile
         #sed -i '43i \		touch $(THISDIR)/bin/xray' /opt/rt-n56u/trunk/user/xray/Makefile
-        sed -i '43i \		cp /usr/bin/v2ray' /opt/rt-n56u/trunk/user/xray/Makefile
+        sed -i '$a \		cp /usr/bin/v2ray' /opt/rt-n56u/trunk/user/xray/Makefile
         echo "$(</opt/rt-n56u/trunk/user/xray/Makefile)"
 
         cd /opt/rt-n56u/trunk
