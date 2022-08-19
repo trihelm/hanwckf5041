@@ -174,10 +174,10 @@ jobs:
         sed -i '1906i # CONFIG_RT_SECOND_IF_MT7915 is not set' /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config
         sed -i '1913i # CONFIG_RT_THIRD_IF_MT7915 is not set' /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config
         #echo "$(</opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config)"
-        #sed -i '42i \\tmv $(THISDIR)/bin/xray /opt/images/' /opt/rt-n56u/trunk/user/xray/Makefile
-        #sed -i '43i \\ttouch $(THISDIR)/bin/xray' /opt/rt-n56u/trunk/user/xray/Makefile
+        sed -i '42i \\tmv $(THISDIR)/bin/xray /opt/images/' /opt/rt-n56u/trunk/user/xray/Makefile
+        sed -i '43i \\ttouch $(THISDIR)/bin/xray' /opt/rt-n56u/trunk/user/xray/Makefile
         #sed -i '$a \\tcp /usr/bin/v2ray /opt/images/' /opt/rt-n56u/trunk/user/xray/Makefile
-        #echo "$(</opt/rt-n56u/trunk/user/xray/Makefile)"
+        echo "$(</opt/rt-n56u/trunk/user/xray/Makefile)"
 
         cd /opt/rt-n56u/trunk
         #cp -f configs/templates/$TNAME.config .config
