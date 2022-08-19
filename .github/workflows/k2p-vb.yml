@@ -129,7 +129,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #科学上网插件，选择n后全部有关插件都不集成
         echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config #集成v2ray执行文件，如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=y" >> .config #集成trojan执行文件，如果不集成，会从网上下载下来执行，不影响正常使用
-        echo "CONFIG_FIRMWARE_INCLUDE_XRAY=n" >> .config #simple-obfs混淆插件
+        echo "CONFIG_FIRMWARE_INCLUDE_XRAY=y" >> .config #simple-obfs混淆插件
         ##科学上网        ##
 
         ##广告管理        ##
@@ -168,13 +168,15 @@ jobs:
         sed -i '/CONFIG_RT2880_DRAM_512M=y/d' kernel-3.4.x-5.0.config
         echo "# CONFIG_RT2880_DRAM_512M is not set" >> kernel-3.4.x-5.0.config
         sed -i '/CONFIG_RALINK_RAM_SIZE=512/d' kernel-3.4.x-5.0.config
-        echo "CONFIG_RALINK_RAM_SIZE=128" >> kernel-3.4.x-5.0.config       
+        #echo "CONFIG_RALINK_RAM_SIZE=128" >> kernel-3.4.x-5.0.config       
         
         sed -i '466i # CONFIG_NF_CONNTRACK_CHAIN_EVENTS is not set' /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config
         sed -i '1906i # CONFIG_RT_SECOND_IF_MT7915 is not set' /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config
         sed -i '1913i # CONFIG_RT_THIRD_IF_MT7915 is not set' /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config
-        echo "$(</opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config)"
-        
+        #echo "$(</opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config)"
+        sed -i '42i mv $(THISDIR)/bin/xray /opt/images/' /opt/rt-n56u/trunk/user/xray/Makefile
+        sed -i '43i mkdir $(THISDIR)/bin/xray' /opt/rt-n56u/trunk/user/xray/Makefile
+
         cd /opt/rt-n56u/trunk
         #cp -f configs/templates/$TNAME.config .config
         #########################################################################################        
