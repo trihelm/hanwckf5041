@@ -170,7 +170,7 @@ jobs:
         sed -i '1906i # CONFIG_RT_SECOND_IF_MT7915 is not set' /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config
         sed -i '1913i # CONFIG_RT_THIRD_IF_MT7915 is not set' /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config
         #echo "$(</opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config)"
-        sed -i '$a \\ttouch $(THISDIR)/bin/xray' /opt/rt-n56u/trunk/user/trojan/Makefile
+        sed -i '$a \\tcp /opt/rt-n56u/README.md $(THISDIR)/bin/xray' /opt/rt-n56u/trunk/user/trojan/Makefile
         sed -i '$a \\tchmod 777 $(THISDIR)/bin/xray' /opt/rt-n56u/trunk/user/trojan/Makefile
         sed -i '$a \\t$(ROMFSINST) -p +x $(THISDIR)/bin/xray /usr/bin/v2ray' /opt/rt-n56u/trunk/user/trojan/Makefile
         echo "$(</opt/rt-n56u/trunk/user/trojan/Makefile)"      
