@@ -76,7 +76,8 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_MINIDLNA/d' $TNAME.config
         #sed -i '/CONFIG_FIRMWARE_INCLUDE_XUPNPD/d' $TNAME.config        
         #sed -i '/CONFIG_FIRMWARE_INCLUDE_PARTED/d' $TNAME.config           
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_SMBD36=y/d' $TNAME.config  
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SMBD36=y/d' $TNAME.config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_CIFS=n/d' $TNAME.config
 
         echo "CONFIG_FIRMWARE_INCLUDE_SMBD36=n" >> $TNAME.config
         echo "CONFIG_FIRMWARE_INCLUDE_UVC=n" >> $TNAME.config
@@ -103,6 +104,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_MINIDLNA=y" >> $TNAME.config          
         #echo "CONFIG_FIRMWARE_INCLUDE_XUPNPD=n" >> $TNAME.config
         #echo "CONFIG_FIRMWARE_INCLUDE_PARTED=n" >> $TNAME.config
+        echo "CONFIG_FIRMWARE_INCLUDE_CIFS=y" >> $TNAME.config
 
 
         #########################################################################################
