@@ -345,9 +345,9 @@ local function processData(szType, content)
 				params[t[1]] = t[2]
 			end
 			
-			if params.peer then
+			if params.sni then
 				-- 未指定peer（sni）默认使用remote addr
-				result.tls_host = params.peer
+				result.tls_host = params.sni
 			end
 			
 			if params.allowInsecure == "1" then
