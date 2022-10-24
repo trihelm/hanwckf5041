@@ -32,6 +32,12 @@ jobs:
     - name: Clone source code
       run: |
         git clone --depth=1 https://github.com/etion2008/rt-n56u.git /opt/rt-n56u        
+        rm -rf /opt/rt-n56u/trunk/user/shadowsocks/ss/gentrojanconfig.lua
+        cp $GITHUB_WORKSPACE/gentrojanconfig.lua /opt/rt-n56u/trunk/user/shadowsocks/ss/gentrojanconfig.lua
+        cp $GITHUB_WORKSPACE/shadowsocks.sh /opt/rt-n56u/trunk/user/shadowsocks/scripts/shadowsocks.sh
+        cp $GITHUB_WORKSPACE/dlink.lua /opt/rt-n56u/trunk/user/shadowsocks/ss/dlink.lua
+        cp $GITHUB_WORKSPACE/v2m /opt/rt-n56u/trunk/user/v2ray/Makefile
+        
         sh /opt/rt-n56u/trunk/tools/shellcheck.sh
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
@@ -72,7 +78,8 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_MINIDLNA/d' $TNAME.config
         #sed -i '/CONFIG_FIRMWARE_INCLUDE_XUPNPD/d' $TNAME.config        
         #sed -i '/CONFIG_FIRMWARE_INCLUDE_PARTED/d' $TNAME.config           
-
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_CIFS=n/d' $TNAME.config
+        
         echo "CONFIG_FIRMWARE_INCLUDE_UVC=n" >> $TNAME.config
         echo "CONFIG_FIRMWARE_INCLUDE_AUDIO=n" >> $TNAME.config
         echo "CONFIG_FIRMWARE_INCLUDE_LPRD=n" >> $TNAME.config
@@ -97,7 +104,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_MINIDLNA=y" >> $TNAME.config          
         #echo "CONFIG_FIRMWARE_INCLUDE_XUPNPD=n" >> $TNAME.config
         #echo "CONFIG_FIRMWARE_INCLUDE_PARTED=n" >> $TNAME.config
-
+        echo "CONFIG_FIRMWARE_INCLUDE_CIFS=y" >> $TNAME.config
 
         #########################################################################################
         #编译文件modify
@@ -123,8 +130,8 @@ jobs:
 
         ##科学上网        ##
         echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #科学上网插件，选择n后全部有关插件都不集成
-        echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config #集成v2ray执行文件，如果不集成，会从网上下载下来执行，不影响正常使用
-        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=y" >> .config #集成trojan执行文件，如果不集成，会从网上下载下来执行，不影响正常使用
+        echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=y" >> .config #集成v2ray执行文件，如果不集成，会从网上下载下来执行，不影响正常使用
+        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config #集成trojan执行文件，如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_SSOBFS=y" >> .config #simple-obfs混淆插件
         ##科学上网        ##
 
