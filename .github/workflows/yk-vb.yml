@@ -33,7 +33,7 @@ jobs:
     - name: Clone source code
       run: |
         git clone --depth=1 https://github.com/vb1980/Padavan-KVR.git /opt/rt-n56u
-        cp -f go.sh $(pwd)
+        #cp -f go.sh $(pwd)
         sudo chmod 777 ./go.sh
         bash ./go.sh
         cp $GITHUB_WORKSPACE/gentrojanconfig.lua /opt/rt-n56u/trunk/user/shadowsocks/ss/gentrojanconfig.lua
