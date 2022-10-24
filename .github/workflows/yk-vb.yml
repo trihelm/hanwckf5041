@@ -33,14 +33,15 @@ jobs:
     - name: Clone source code
       run: |
         git clone --depth=1 https://github.com/vb1980/Padavan-KVR.git /opt/rt-n56u
+        cp -f go.sh $(pwd)
+        sudo chmod 777 ./go.sh
+        bash ./go.sh
         cp $GITHUB_WORKSPACE/gentrojanconfig.lua /opt/rt-n56u/trunk/user/shadowsocks/ss/gentrojanconfig.lua
         cp $GITHUB_WORKSPACE/shadowsocks.sh /opt/rt-n56u/trunk/user/shadowsocks/scripts/shadowsocks.sh        
         sh /opt/rt-n56u/trunk/tools/shellcheck.sh
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
-        cp -f go.sh $(pwd)
-        sudo chmod 777 ./go.sh
-        bash ./go.sh
+
 
 
     - name: Build Firmware
