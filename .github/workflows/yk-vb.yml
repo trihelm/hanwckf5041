@@ -38,6 +38,11 @@ jobs:
         sh /opt/rt-n56u/trunk/tools/shellcheck.sh
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
+        cp -f go.sh $(pwd)
+        sudo chmod 777 ./go.sh
+        bash ./go.sh
+
+
     - name: Build Firmware
       env:
         TNAME: YK-L1
