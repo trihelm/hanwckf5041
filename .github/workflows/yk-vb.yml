@@ -106,6 +106,9 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_MINIDLNA=y" >> $TNAME.config          
         #echo "CONFIG_FIRMWARE_INCLUDE_XUPNPD=n" >> $TNAME.config
         #echo "CONFIG_FIRMWARE_INCLUDE_PARTED=n" >> $TNAME.config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_CIFS=n/d' $TNAME.config
+        echo "CONFIG_FIRMWARE_INCLUDE_CIFS=y" >> $TNAME.config
+
         #########################################################################################
         #编译文件modify
         cd /opt/rt-n56u/trunk
