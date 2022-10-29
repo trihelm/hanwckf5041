@@ -26,6 +26,7 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
+        TIME_ZONE: Asia/Shanghai
         sudo apt-get update
         sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot kmod \
         cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
@@ -54,7 +55,6 @@ jobs:
     - name: Build Firmware
       env:
         TNAME: YK-L1
-        TIME_ZONE: Asia/Shanghai
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
