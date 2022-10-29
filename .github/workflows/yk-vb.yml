@@ -44,14 +44,6 @@ jobs:
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
 
-    - name: Set busybox's version to compile
-      run: |
-        cd $WORK_PATH/trunk/user/busybox
-        sed -i "s/SRC_NAME=busybox.*/SRC_NAME=busybox-1.24.x/g" ./Makefile
-        cd $WORK_PATH/trunk
-        sed -i "s/busybox_id=.*/busybox_id=\"1.24.x\"/g" ./build_firmware_modify
-
-
     - name: Build Firmware
       env:
         TNAME: YK-L1
