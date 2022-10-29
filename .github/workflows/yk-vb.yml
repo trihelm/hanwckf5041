@@ -17,7 +17,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
 
     steps:
     - name: Checkout
@@ -164,8 +164,8 @@ jobs:
         
         mkdir -p /opt/images/
         sudo ./clear_tree
-        func_enable_kernel_param "CONFIG_CIFS"
-        func_enable_busybox_param "CONFIG_FEATURE_MOUNT_CIFS"
+        #func_enable_kernel_param "CONFIG_CIFS"
+        #func_enable_busybox_param "CONFIG_FEATURE_MOUNT_CIFS"
         sudo ./build_firmware_modify $TNAME 0
         sudo mv -f images/*.trx /opt/images/
         
