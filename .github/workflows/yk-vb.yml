@@ -158,8 +158,11 @@ jobs:
         sed -i '1906i # CONFIG_RT_SECOND_IF_MT7915 is not set' /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config
         sed -i '1913i # CONFIG_RT_THIRD_IF_MT7915 is not set' /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config
 
-        sed -i '500i CONFIG_CIFS=y' /opt/rt-n56u/trunk/linux-3.4.x/.config 
-        sed -i '501i CONFIG_FEATURE_MOUNT_CIFS=y' /opt/rt-n56u/trunk/user/busybox/busybox-1.34.1/.config      
+        m="sed -i '$a CONFIG_CIFS=y' $kernel_tf"
+        n="sed -i '$a CONFIG_FEATURE_MOUNT_CIFS=y' $busybox_tf"
+        sed -i '500i sed -i '$a CONFIG_CIFS=y' $kernel_tf' /opt/rt-n56u/trunk/build_firmware_modify 
+        sed -i '501i sed -i '$a CONFIG_FEATURE_MOUNT_CIFS=y' $busybox_tf' /opt/rt-n56u/trunk/build_firmware_modify
+        
 
         cd /opt/rt-n56u/trunk
         #cp -f configs/templates/$TNAME.config .config
