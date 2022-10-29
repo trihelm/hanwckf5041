@@ -113,23 +113,7 @@ jobs:
         #编译文件modify
         cd /opt/rt-n56u/trunk
         cp -f configs/templates/$TNAME.config .config
-        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config/d' build_firmware_modify
-        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=y" >> .config/d' build_firmware_modify
-        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=y" >> .config/d' build_firmware_modify
-        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_SSOBFS=y" >> .config/d' build_firmware_modify
-        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config/d' build_firmware_modify
-        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=y" >> .config/d' build_firmware_modify
-        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> .config/d' build_firmware_modify
-        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=y" >> .config/d' build_firmware_modify
-        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_CADDY=y" >> .config/d' build_firmware_modify
-        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config/d' build_firmware_modify 
-        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_WYY=y" >> .config/d' build_firmware_modify
-        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=n" >> .config/d' build_firmware_modify
-        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=y" >> .config/d' build_firmware_modify
-        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config/d' build_firmware_modify
-        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_FRPC=y" >> .config/d' build_firmware_modify
-        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config/d' build_firmware_modify
-        sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_NPC=y" >> .config/d' build_firmware_modify
+
         ##科学上网        ##
         echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #科学上网插件，选择n后全部有关插件都不集成
         echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config #集成v2ray执行文件，如果不集成，会从网上下载下来执行，不影响正常使用
