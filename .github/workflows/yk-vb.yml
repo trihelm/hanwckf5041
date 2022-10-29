@@ -27,9 +27,10 @@ jobs:
         DEBIAN_FRONTEND: noninteractive
       run: |
         sudo apt-get update
-        sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd \
+        sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot kmod \
         cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
-        pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev gcc-multilib libev-dev
+        pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget libc-dev-bin
+        sudo timedatectl set-timezone "$TIME_ZONE"
     - name: Clone source code
       run: |
         git clone --depth=1 https://github.com/vb1980/Padavan-KVR.git /opt/rt-n56u
@@ -42,11 +43,18 @@ jobs:
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
 
+    - name: Set busybox's version to compile
+      run: |
+        cd $WORK_PATH/trunk/user/busybox
+        sed -i "s/SRC_NAME=busybox.*/SRC_NAME=busybox-1.24.x/g" ./Makefile
+        cd $WORK_PATH/trunk
+        sed -i "s/busybox_id=.*/busybox_id=\"1.24.x\"/g" ./build_firmware_modify
 
 
     - name: Build Firmware
       env:
         TNAME: YK-L1
+        TIME_ZONE: Asia/Shanghai
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
