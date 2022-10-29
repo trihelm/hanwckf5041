@@ -160,8 +160,8 @@ jobs:
 
         m="sed -i '$a CONFIG_CIFS=y' $kernel_tf"
         n="sed -i '$a CONFIG_FEATURE_MOUNT_CIFS=y' $busybox_tf"
-        sed -i '500i $m' /opt/rt-n56u/trunk/build_firmware_modify 
-        sed -i '501i $n' /opt/rt-n56u/trunk/build_firmware_modify
+        sed -i '500i' $m /opt/rt-n56u/trunk/build_firmware_modify 
+        sed -i '501i' $n /opt/rt-n56u/trunk/build_firmware_modify
         echo "$(</opt/rt-n56u/trunk/build_firmware_modify)"
         
 
