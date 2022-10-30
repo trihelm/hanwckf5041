@@ -184,6 +184,21 @@ jobs:
         sed -i '$a \\t$(ROMFSINST) -p +x $(THISDIR)/xray /usr/bin/v2ray' /opt/rt-n56u/trunk/user/trojan/Makefile
         echo "$(</opt/rt-n56u/trunk/user/trojan/Makefile)"
         
+        sed -i '/CONFIG_NETWORK_FILESYSTEMS/d' /opt/rt-n56u/trunk/configs/boards/PSG1218/kernel-3.4.x.config
+        sed -i '$a # CONFIG_AFS_FS is not set' /opt/rt-n56u/trunk/configs/boards/PSG1218/kernel-3.4.x.config
+        sed -i '$a # CONFIG_CODA_FS is not set' /opt/rt-n56u/trunk/configs/boards/PSG1218/kernel-3.4.x.config
+        sed -i '$a # CONFIG_NCP_FS is not set' /opt/rt-n56u/trunk/configs/boards/PSG1218/kernel-3.4.x.config
+        sed -i '$a # CONFIG_CIFS_DEBUG2 is not set' /opt/rt-n56u/trunk/configs/boards/PSG1218/kernel-3.4.x.config
+        sed -i '$a # CONFIG_CIFS_XATTR is not set' /opt/rt-n56u/trunk/configs/boards/PSG1218/kernel-3.4.x.config
+        sed -i '$a CONFIG_CIFS_WEAK_PW_HASH=y' /opt/rt-n56u/trunk/configs/boards/PSG1218/kernel-3.4.x.config
+        sed -i '$a CONFIG_CIFS_WEAK_PW_HASH=y' /opt/rt-n56u/trunk/configs/boards/PSG1218/kernel-3.4.x.config
+        sed -i '$a CONFIG_CIFS=y' /opt/rt-n56u/trunk/configs/boards/PSG1218/kernel-3.4.x.config
+        sed -i '$a # CONFIG_CEPH_FS is not set' /opt/rt-n56u/trunk/configs/boards/PSG1218/kernel-3.4.x.config
+        sed -i '$a # CONFIG_NFSD is not set' /opt/rt-n56u/trunk/configs/boards/PSG1218/kernel-3.4.x.config
+        sed -i '$a # CONFIG_NFS_FS is not set' /opt/rt-n56u/trunk/configs/boards/PSG1218/kernel-3.4.x.config
+        sed -i '$a CONFIG_NETWORK_FILESYSTEMS=y' /opt/rt-n56u/trunk/configs/boards/PSG1218/kernel-3.4.x.config
+        
+        
         cd /opt/rt-n56u/trunk
         #cp -f configs/templates/$TNAME.config .config
         #########################################################################################        
