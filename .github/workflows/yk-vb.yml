@@ -6,11 +6,10 @@ on:
 
   #repository_dispatch:
   workflow_dispatch:
-   inputs:
-      tags:
-         - 'v*'
-      branches: 
-         - vb 
+      #tags:
+         #- 'v*'
+      #branches: 
+         #- vb 
 
 jobs:
   build:
