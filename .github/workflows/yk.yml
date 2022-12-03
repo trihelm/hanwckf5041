@@ -2,9 +2,7 @@
 name: Build yk-en
 
 on: 
-  release:
-    types: [published]
-  push:
+  workflow_dispatch:
     tags:
        - 'v*'
     branches: 
