@@ -2,13 +2,13 @@
 name: Build ykvb
 
 on:
-  push:
+  #push:
+
+  workflow_dispatch:
     tags:
        - 'v*'
     branches: 
        - vb
-  workflow_dispatch:
-
 
 jobs:
   build:
