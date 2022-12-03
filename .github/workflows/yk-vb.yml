@@ -2,6 +2,11 @@
 name: Build ykvb
 
 on:
+  push:
+    tags:
+       - 'v*'
+    branches: 
+       - en
   workflow_dispatch:
 
 
