@@ -2,17 +2,11 @@
 name: Build K2-en
 
 on: 
-  release:
-    types: [published]
-  push:
+  workflow_dispatch:
     tags:
        - 'v*'
     branches: 
        - en
-#  schedule:
-#    - cron: 0 8 * * 5
- # watch:
- #   types: [started]
 
 jobs:
   build:
