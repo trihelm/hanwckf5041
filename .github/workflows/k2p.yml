@@ -3,10 +3,7 @@ name: Build k2p-h
 
 on: 
   workflow_dispatch:
-    tags:
-       - 'v*'
-    branches: 
-       - master
+
 #  schedule:
 #    - cron: 0 8 * * 5
  # watch:
