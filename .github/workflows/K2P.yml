@@ -2,9 +2,7 @@
 name: Build K2P-en
 
 on: 
-  release:
-    types: [published]
-  push:
+  workflow_dispatch:
     tags:
        - 'v*'
     branches: 
