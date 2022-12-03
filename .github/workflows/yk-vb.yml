@@ -3,9 +3,9 @@ name: Build yk-vb
 
 on:
   #push:
-
   #repository_dispatch:
   workflow_dispatch:
+  branches: [ "vb" ]
       #tags:
          #- 'v*'
       #branches: 
