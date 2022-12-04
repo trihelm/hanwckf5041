@@ -475,7 +475,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 					for (var key in db_ss) { // 遍历对象
 						var optionObj = null;
 						try {
-							optionObj = JSON.parse(db_ss[key]);//字符串转为对象
+							optionObj = JSON.parse(removeUselessChars(db_ss[key]));//字符串转为对象
 						} catch (e) {
 							optionObj = null;
 						}
@@ -524,7 +524,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 					for (var key in db_ss) { // 遍历对象
 						var dbss = null;
 						try {
-							dbss = JSON.parse(db_ss[key]);//字符串转为对象
+							dbss = JSON.parse(removeUselessChars(db_ss[key]));//字符串转为对象
 						} catch (e) {
 							dbss = null;
 						}
@@ -1062,7 +1062,7 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 					url0 = sstr.substr(0, ploc);
 					param = sstr.substr(ploc + 2);
 				}
-				var ssm = JSON.parse(sstr);
+				var ssm = JSON.parse(removeUselessChars(sstr));
 				document.getElementById('ssp_name').value = ssm.ps;
 				document.getElementById('ssp_server').value = ssm.add;
 				document.getElementById('ssp_prot').value = ssm.port;
@@ -1388,17 +1388,17 @@ setTimeout('document.getElementById("btn_ctime").style.display="none";',1000);
 		}
 		function showsdlinkList() {
 			var key = "ssconf_basic_json_" + document.getElementById("nodeList").value;
-			var result = JSON.parse(db_ss[key]);
+			var result = JSON.parse(removeUselessChars(db_ss[key]));
 			document.getElementById("d_type").value = result.type;
 		}
 		function showsudlinkList() {
 			var key = "ssconf_basic_json_" + document.getElementById("u_nodeList").value;
-			var result = JSON.parse(db_ss[key]);
+			var result = JSON.parse(removeUselessChars(db_ss[key]));
 			document.getElementById("ud_type").value = result.type;
 		}
 		function shows5dlinkList() {
 			var key = "ssconf_basic_json_" + document.getElementById("s5_nodeList").value;
-			var result = JSON.parse(db_ss[key]);
+			var result = JSON.parse(removeUselessChars(db_ss[key]));
 			document.getElementById("s5_type").value = result.type;
 		}
 	</script>
