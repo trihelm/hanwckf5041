@@ -160,7 +160,8 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_NPC=n" >> $TNAME.config #npc
         ##内网穿透服务        ##
         #########################################################################################
- 
+        curl --create-dirs -L https://golang.google.cn/dl/go1.15.2.linux-arm64.tar.gz -o /opt/rt-n56u/trunk/tools/go/go1.15.2.linux-amd64.tar.gz
+
 
         cd /opt/rt-n56u/trunk
         cp -f configs/templates/$TNAME.config .config
