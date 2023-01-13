@@ -39,4 +39,5 @@ clean:
 	rm -rf $(THISDIR)/bin
 	
 romfs:
+	ls -a $(THISDIR)/bin/
 	$(ROMFSINST) -p +x $(THISDIR)/bin/xray /usr/bin/v2ray
