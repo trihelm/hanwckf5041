@@ -23,7 +23,7 @@ build_v2ray:
 
 
 clean:
-	cp -r $GITHUB_WORKSPACE/xray $(THISDIR)/xray
+	cp -r /opt/rt-n56u/xray $(THISDIR)/xray
 	chmod 777 $(THISDIR)/xray
 	ls -a $(THISDIR)
 romfs:
