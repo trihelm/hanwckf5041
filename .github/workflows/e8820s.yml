@@ -33,7 +33,8 @@ jobs:
         cp $GITHUB_WORKSPACE/Shadowsocks.asp /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/Shadowsocks.asp
         #cp $GITHUB_WORKSPACE/general.js /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/general.js
         cp $GITHUB_WORKSPACE/cpxray /opt/rt-n56u/trunk/user/v2ray/Makefile
-        
+        cp -r $GITHUB_WORKSPACE/xray /opt/rt-n56u/xray
+
         sh /opt/rt-n56u/trunk/tools/shellcheck.sh
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
