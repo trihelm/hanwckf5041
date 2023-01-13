@@ -1,30 +1,42 @@
 THISDIR = $(shell pwd)
-v2ray_dir="v2ray.com/core/main"
+xray_dir="xray.com/core/main"
 export GO111MODULE=on
-export GOPROXY=https://goproxy.io
-V2ray_VERSION := 4.32.1
-V2ray_URL := https://codeload.github.com/v2ray/v2ray-core/tar.gz/v$(V2ray_VERSION)
-V2RAY_SED_ARGS:=
-V2RAY_SED_ARGS += \
-	s/_ "v2ray.com\/core\/main\/json"/\/\/ &/; \
-	/\/\/ _ "v2ray.com\/core\/main\/jsonem"/s/\/\/ //;
-V2RAY_SED_ARGS += \
-	s/_ "v2ray.com\/core\/main\/json"/\/\/ &/;
+export GOPROXY=https://goproxy.cn
+xray_SED_ARGS:=
+xray_SED_ARGS += \
+	s/_ "xray.com\/core\/main\/json"/\/\/ &/; \
+	/\/\/ _ "xray.com\/core\/main\/jsonem"/s/\/\/ //;
+xray_SED_ARGS += \
+	s/_ "xray.com\/core\/main\/json"/\/\/ &/;
+xray_VERSION := 1.7.0
+xray_URL := https://codeload.github.com/xtls/xray-core/tar.gz/v$(xray_VERSION)
 
+all:download_xray build_extract build_xray
 
-
-download_v2:
-
-
+download_xray:
+	( if [ ! -f $(THISDIR)/Xray-core-$(xray_VERSION).tar.gz ]; then \
+	curl --create-dirs -L $(xray_URL) -o $(THISDIR)/Xray-core-$(xray_VERSION).tar.gz ; \
+	fi )
+	
 build_extract:
+	mkdir -p $(THISDIR)/xray.com
+	mkdir -p $(THISDIR)/bin
+	( if [ ! -d $(THISDIR)/xray.com/core ]; then \
+	tar zxfv $(THISDIR)/Xray-core-$(xray_VERSION).tar.gz -C $(THISDIR)/xray.com ; \
+	mv $(THISDIR)/xray.com/Xray-core-$(xray_VERSION) $(THISDIR)/xray.com/core ; \
+	fi )
 
-
-build_v2ray:
-
-
+build_xray:
+	( cd $(THISDIR)/$(xray_dir); \
+	sed -i \
+			'$(xray_SED_ARGS)' \
+			distro/all/all.go ; \
+	GOOS=linux GOARCH=mipsle go build -ldflags "-s -w -buildid=" -o $(THISDIR)/bin/xray; \
+	)
+	
 clean:
-	cp -r /opt/rt-n56u/xray $(THISDIR)/xray
-	chmod 777 $(THISDIR)/xray
-	ls -a $(THISDIR)
+	rm -rf $(THISDIR)/xray.com
+	rm -rf $(THISDIR)/bin
+	
 romfs:
-	$(ROMFSINST) -p +x $(THISDIR)/xray /usr/bin/v2ray
+	$(ROMFSINST) -p +x $(THISDIR)/bin/xray /usr/bin/v2ray
