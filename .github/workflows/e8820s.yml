@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
 
     steps:
     - name: Checkout
@@ -124,7 +124,7 @@ jobs:
         sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_NPC=y" >> .config/d' build_firmware_modify
 
 
-   
+        cd /opt/rt-n56u/trunk/configs/templates  
         ##科学上网        ##
         echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> $TNAME.config #科学上网插件，选择n后全部有关插件都不集成
         echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=y" >> $TNAME.config #集成v2ray执行文件，如果不集成，会从网上下载下来执行，不影响正常使用
