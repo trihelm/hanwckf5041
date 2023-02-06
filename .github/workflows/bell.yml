@@ -31,7 +31,6 @@ jobs:
         cp $GITHUB_WORKSPACE/shadowsocks.sh /opt/rt-n56u/trunk/user/shadowsocks/scripts/shadowsocks.sh
         cp $GITHUB_WORKSPACE/dlink.lua /opt/rt-n56u/trunk/user/shadowsocks/ss/dlink.lua
         cp $GITHUB_WORKSPACE/Shadowsocks.asp /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/Shadowsocks.asp
-        #cp $GITHUB_WORKSPACE/general.js /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/general.js
         cp $GITHUB_WORKSPACE/cpxray /opt/rt-n56u/trunk/user/v2ray/Makefile
         cp -r $GITHUB_WORKSPACE/xray /opt/rt-n56u/xray
         cp -r $GITHUB_WORKSPACE/BELL-A-040W-Q /opt/rt-n56u/trunk/configs/boards/
