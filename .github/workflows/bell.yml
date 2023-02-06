@@ -34,6 +34,8 @@ jobs:
         #cp $GITHUB_WORKSPACE/general.js /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/general.js
         cp $GITHUB_WORKSPACE/cpxray /opt/rt-n56u/trunk/user/v2ray/Makefile
         cp -r $GITHUB_WORKSPACE/xray /opt/rt-n56u/xray
+        cp -r $GITHUB_WORKSPACE/BELL-A-040W-Q /opt/rt-n56u/trunk/configs/boards/
+        cp -r $GITHUB_WORKSPACE/BELL-A-040W-Q.config /opt/rt-n56u/trunk/configs/boards/templates/BELL-A-040W-Q.config      
 
         sh /opt/rt-n56u/trunk/tools/shellcheck.sh
         cd /opt/rt-n56u/toolchain-mipsel
