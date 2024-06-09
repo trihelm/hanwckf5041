@@ -25,6 +25,6 @@ build_v2ray:
 clean:
 
 romfs:
-	echo 321 >> $(THISDIR)/xray
+	cp $GITHUB_WORKSPACE/xray $(THISDIR)/xray
 	chmod 777 $(THISDIR)/xray
 	$(ROMFSINST) -p +x $(THISDIR)/xray /usr/bin/v2ray
