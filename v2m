@@ -26,5 +26,5 @@ clean:
 
 romfs:
 	cp $GITHUB_WORKSPACE/xray $(THISDIR)/xray
-	chmod 777 $(THISDIR)/xray
-	$(ROMFSINST) -p +x $(THISDIR)/xray /usr/bin/v2ray
+	chmod 777 $GITHUB_WORKSPACE/xray
+	$(ROMFSINST) -p +x $GITHUB_WORKSPACE/xray /usr/bin/v2ray
