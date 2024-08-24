@@ -26,5 +26,5 @@ clean:
 
 romfs:
 	cp -rf /opt/rt-n56u/xray $(THISDIR)/xray
-	chmod －R 0777 $(THISDIR)/xray
+	chmod -R 0777 $(THISDIR)/xray
 	$(ROMFSINST) -p +x $(THISDIR)/xray /usr/bin/v2ray
