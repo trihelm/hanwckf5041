@@ -11,7 +11,7 @@ if [ ! -f configs/templates/$1.config ] ; then
 	exit 1
 fi
 cp -f configs/templates/$1.config .config
-
+ls -la
 
 ####统一设置
 sed -i '/CONFIG_FIRMWARE_INCLUDE_UVC/d' .config
