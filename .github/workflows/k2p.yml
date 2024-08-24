@@ -1,0 +1,95 @@
+#修改TNAME: K2P-5.0 中的K2P-5.0为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同.
+name: Build K2P-en
+
+on: 
+  workflow_dispatch:
+    tags:
+       - 'v*'
+    branches: 
+       - en
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    - name: Initialization environment
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        sudo apt-get update
+        sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd \
+        cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
+        pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev gcc-multilib libev-dev
+    - name: Clone source code
+      run: |
+        git clone --depth=1 https://github.com/etion2008/rt-n56u.git /opt/rt-n56u        
+        rm -rf /opt/rt-n56u/trunk/user/shadowsocks/ss/gentrojanconfig.lua
+        cp $GITHUB_WORKSPACE/gentrojanconfig.lua /opt/rt-n56u/trunk/user/shadowsocks/ss/gentrojanconfig.lua
+        cp $GITHUB_WORKSPACE/shadowsocks.sh /opt/rt-n56u/trunk/user/shadowsocks/scripts/shadowsocks.sh
+        cp $GITHUB_WORKSPACE/dlink.lua /opt/rt-n56u/trunk/user/shadowsocks/ss/dlink.lua
+        cp $GITHUB_WORKSPACE/v2m /opt/rt-n56u/trunk/user/v2ray/Makefile
+        cp $GITHUB_WORKSPACE/Shadowsocks.asp /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/Shadowsocks.asp
+        #cp $GITHUB_WORKSPACE/general.js /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/general.js
+        cp -r $GITHUB_WORKSPACE/v2m /opt/rt-n56u/xray
+        
+        sh /opt/rt-n56u/trunk/tools/shellcheck.sh
+        cd /opt/rt-n56u/toolchain-mipsel
+        sh dl_toolchain.sh
+    - name: Build Firmware
+      env:
+        TNAME: K2P
+      run: |
+        cd /opt/rt-n56u/trunk
+        if [ ! -f configs/templates/$TNAME.config ] ; then
+        echo "configs/templates/$TNAME.config not found "
+        exit 1
+        fi
+
+        #########################################################################################
+ 
+        cd /opt/rt-n56u/trunk/configs/boards/K2P
+        sed -i '/# CONFIG_RT2880_DRAM_128M is not set/d' kernel-3.4.x-5.0.config
+        echo "CONFIG_RT2880_DRAM_128M=y" >> kernel-3.4.x-5.0.config
+        sed -i '/CONFIG_RT2880_DRAM_512M=y/d' kernel-3.4.x-5.0.config
+        echo "# CONFIG_RT2880_DRAM_512M is not set" >> kernel-3.4.x-5.0.config
+        sed -i '/CONFIG_RALINK_RAM_SIZE=512/d' kernel-3.4.x-5.0.config
+        echo "CONFIG_RALINK_RAM_SIZE=128" >> kernel-3.4.x-5.0.config       
+        ########补丁##########################
+        sed -i '/CONFIG_NETWORK_FILESYSTEMS/d' /opt/rt-n56u/trunk/configs/boards/K2P/kernel-3.4.x-5.0.config
+        sed -i '$a # CONFIG_AFS_FS is not set' /opt/rt-n56u/trunk/configs/boards/K2P/kernel-3.4.x-5.0.config
+        sed -i '$a # CONFIG_CODA_FS is not set' /opt/rt-n56u/trunk/configs/boards/K2P/kernel-3.4.x-5.0.config
+        sed -i '$a # CONFIG_NCP_FS is not set' /opt/rt-n56u/trunk/configs/boards/K2P/kernel-3.4.x-5.0.config
+        sed -i '$a # CONFIG_CIFS_DEBUG2 is not set' /opt/rt-n56u/trunk/configs/boards/K2P/kernel-3.4.x-5.0.config
+        sed -i '$a # CONFIG_CIFS_XATTR is not set' /opt/rt-n56u/trunk/configs/boards/K2P/kernel-3.4.x-5.0.config
+        sed -i '$a CONFIG_CIFS_WEAK_PW_HASH=y' /opt/rt-n56u/trunk/configs/boards/K2P/kernel-3.4.x-5.0.config
+        sed -i '$a # CONFIG_CIFS_STATS is not set' /opt/rt-n56u/trunk/configs/boards/K2P/kernel-3.4.x-5.0.config
+        sed -i '$a CONFIG_CIFS=y' /opt/rt-n56u/trunk/configs/boards/K2P/kernel-3.4.x-5.0.config
+        sed -i '$a # CONFIG_CEPH_FS is not set' /opt/rt-n56u/trunk/configs/boards/K2P/kernel-3.4.x-5.0.config
+        sed -i '$a # CONFIG_NFSD is not set' /opt/rt-n56u/trunk/configs/boards/K2P/kernel-3.4.x-5.0.config
+        sed -i '$a # CONFIG_NFS_FS is not set' /opt/rt-n56u/trunk/configs/boards/K2P/kernel-3.4.x-5.0.config
+        sed -i '$a CONFIG_NETWORK_FILESYSTEMS=y' /opt/rt-n56u/trunk/configs/boards/K2P/kernel-3.4.x-5.0.config
+
+
+        cd /opt/rt-n56u/trunk
+        curl --create-dirs -L https://golang.google.cn/dl/go1.15.2.linux-amd64.tar.gz -o /opt/rt-n56u/trunk/tools/go/go1.15.2.linux-amd64.tar.gz
+        #cp -f configs/templates/$TNAME.config .config
+        #########################################################################################        
+        
+        mkdir -p /opt/images/
+        sudo ./clear_tree
+        sudo ./build_firmware_modify $TNAME 0
+        sudo mv -f images/*.trx /opt/images/
+        
+        #more .config
+        # sudo ./clear_tree
+        # sudo ./build_firmware_bkye $TNAME
+        # sudo mv -f images/*.trx /opt/images/
+    - name : Upload packages
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: Padavan-packages
+        path: /opt/images
