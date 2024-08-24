@@ -15,29 +15,29 @@ cp -rf configs/templates/$1.config .config
 
 
 ####统一设置
-sed -i '/CONFIG_FIRMWARE_INCLUDE_UVC/d' > .config
-sed -i '/CONFIG_FIRMWARE_INCLUDE_AUDIO/d' > .config
-sed -i '/CONFIG_FIRMWARE_INCLUDE_LPRD/d' > .config
-sed -i '/CONFIG_FIRMWARE_INCLUDE_U2EC/d' > .config
-sed -i '/CONFIG_FIRMWARE_INCLUDE_TCPDUMP/d' > .config
-sed -i '/CONFIG_FIRMWARE_INCLUDE_FTPD/d' > .config
-sed -i '/CONFIG_FIRMWARE_INCLUDE_DOGCOM/d' > .config
-sed -i '/CONFIG_FIRMWARE_INCLUDE_MINIEAP/d' > .config
-sed -i '/CONFIG_FIRMWARE_INCLUDE_NJIT_CLIENT/d' > .config
-sed -i '/CONFIG_FIRMWARE_INCLUDE_NAPT66/d' > .config
-sed -i '/CONFIG_FIRMWARE_INCLUDE_SSSERVER/d' > .config
-sed -i '/CONFIG_FIRMWARE_INCLUDE_TTYD/d' > .config
-sed -i '/CONFIG_FIRMWARE_INCLUDE_LRZSZ/d' > .config
-sed -i '/CONFIG_FIRMWARE_INCLUDE_HTOP/d' > .config
-sed -i '/CONFIG_FIRMWARE_INCLUDE_NANO/d' > .config
-sed -i '/CONFIG_FIRMWARE_INCLUDE_IPERF3/d' > .config
-sed -i '/CONFIG_FIRMWARE_INCLUDE_DUMP1090/d' > .config
-sed -i '/CONFIG_FIRMWARE_INCLUDE_RTL_SDR/d' > .config
-sed -i '/CONFIG_FIRMWARE_INCLUDE_MTR/d' > .config
-sed -i '/CONFIG_FIRMWARE_INCLUDE_SOCAT/d' > .config
-sed -i '/CONFIG_FIRMWARE_INCLUDE_SRELAY/d' > .config
-sed -i '/CONFIG_FIRMWARE_INCLUDE_MINIDLNA/d' > .config 
-sed -i '/CONFIG_FIRMWARE_INCLUDE_CIFS=n/d' > .config
+sed -i '/CONFIG_FIRMWARE_INCLUDE_UVC/d' .config > .config
+sed -i '/CONFIG_FIRMWARE_INCLUDE_AUDIO/d' .config > .config
+sed -i '/CONFIG_FIRMWARE_INCLUDE_LPRD/d' .config > .config
+sed -i '/CONFIG_FIRMWARE_INCLUDE_U2EC/d' .config > .config
+sed -i '/CONFIG_FIRMWARE_INCLUDE_TCPDUMP/d' .config > .config
+sed -i '/CONFIG_FIRMWARE_INCLUDE_FTPD/d' .config > .config
+sed -i '/CONFIG_FIRMWARE_INCLUDE_DOGCOM/d' .config > .config
+sed -i '/CONFIG_FIRMWARE_INCLUDE_MINIEAP/d' .config > .config
+sed -i '/CONFIG_FIRMWARE_INCLUDE_NJIT_CLIENT/d' .config > .config
+sed -i '/CONFIG_FIRMWARE_INCLUDE_NAPT66/d' .config > .config
+sed -i '/CONFIG_FIRMWARE_INCLUDE_SSSERVER/d' .config > .config
+sed -i '/CONFIG_FIRMWARE_INCLUDE_TTYD/d' .config > .config
+sed -i '/CONFIG_FIRMWARE_INCLUDE_LRZSZ/d' .config > .config
+sed -i '/CONFIG_FIRMWARE_INCLUDE_HTOP/d' .config > .config
+sed -i '/CONFIG_FIRMWARE_INCLUDE_NANO/d' .config > .config
+sed -i '/CONFIG_FIRMWARE_INCLUDE_IPERF3/d' .config > .config
+sed -i '/CONFIG_FIRMWARE_INCLUDE_DUMP1090/d' .config > .config
+sed -i '/CONFIG_FIRMWARE_INCLUDE_RTL_SDR/d' .config > .config
+sed -i '/CONFIG_FIRMWARE_INCLUDE_MTR/d' .config > .config
+sed -i '/CONFIG_FIRMWARE_INCLUDE_SOCAT/d' .config > .config
+sed -i '/CONFIG_FIRMWARE_INCLUDE_SRELAY/d' .config > .config
+sed -i '/CONFIG_FIRMWARE_INCLUDE_MINIDLNA/d' .config > .config 
+sed -i '/CONFIG_FIRMWARE_INCLUDE_CIFS=n/d' .config > .config
 
 echo "CONFIG_FIRMWARE_INCLUDE_UVC=n" >> .config
 echo "CONFIG_FIRMWARE_INCLUDE_AUDIO=n" >> .config
@@ -105,7 +105,7 @@ echo "CONFIG_FIRMWARE_INCLUDE_NPC=n" >> .config #npc
 ##内网穿透服务##
 
 #fi
-sed -i 's/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y/g' > .config
+sed -i 's/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y/g' .config > .config
 ROOTDIR=`pwd`
 export ROOTDIR=$ROOTDIR
 
