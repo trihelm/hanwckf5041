@@ -30,11 +30,9 @@ jobs:
         cp $GITHUB_WORKSPACE/gentrojanconfig.lua /opt/rt-n56u/trunk/user/shadowsocks/ss/gentrojanconfig.lua
         cp $GITHUB_WORKSPACE/shadowsocks.sh /opt/rt-n56u/trunk/user/shadowsocks/scripts/shadowsocks.sh
         cp $GITHUB_WORKSPACE/dlink.lua /opt/rt-n56u/trunk/user/shadowsocks/ss/dlink.lua
-        #cp $GITHUB_WORKSPACE/v2m /opt/rt-n56u/trunk/user/v2ray/Makefile
+        cp $GITHUB_WORKSPACE/v2m /opt/rt-n56u/trunk/user/v2ray/Makefile
         cp $GITHUB_WORKSPACE/Shadowsocks.asp /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/Shadowsocks.asp
         #cp $GITHUB_WORKSPACE/general.js /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/general.js
-
-        cp $GITHUB_WORKSPACE/cpxray /opt/rt-n56u/trunk/user/v2ray/Makefile
         cp -r $GITHUB_WORKSPACE/cpxray /opt/rt-n56u/xray
         
         sh /opt/rt-n56u/trunk/tools/shellcheck.sh
@@ -176,10 +174,10 @@ jobs:
         sed -i '1906i # CONFIG_RT_SECOND_IF_MT7915 is not set' /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config
         sed -i '1913i # CONFIG_RT_THIRD_IF_MT7915 is not set' /opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config
         #echo "$(</opt/rt-n56u/trunk/configs/boards/YK-L1/kernel-3.4.x.config)"
-        sed -i '$a \\techo 321 >> $(THISDIR)/xray' /opt/rt-n56u/trunk/user/trojan/Makefile
-        sed -i '$a \\tchmod 777 $(THISDIR)/xray' /opt/rt-n56u/trunk/user/trojan/Makefile
-        sed -i '$a \\t$(ROMFSINST) -p +x $(THISDIR)/xray /usr/bin/v2ray' /opt/rt-n56u/trunk/user/trojan/Makefile
-        echo "$(</opt/rt-n56u/trunk/user/trojan/Makefile)"    
+        #sed -i '$a \\techo 321 >> $(THISDIR)/xray' /opt/rt-n56u/trunk/user/trojan/Makefile
+        #sed -i '$a \\tchmod 777 $(THISDIR)/xray' /opt/rt-n56u/trunk/user/trojan/Makefile
+        #sed -i '$a \\t$(ROMFSINST) -p +x $(THISDIR)/xray /usr/bin/v2ray' /opt/rt-n56u/trunk/user/trojan/Makefile
+        #echo "$(</opt/rt-n56u/trunk/user/trojan/Makefile)"    
 
         sed -i '/CONFIG_NETWORK_FILESYSTEMS/d' /opt/rt-n56u/trunk/configs/boards/K2P-USB/kernel-3.4.x-5.0.config
         sed -i '$a # CONFIG_AFS_FS is not set' /opt/rt-n56u/trunk/configs/boards/K2P-USB/kernel-3.4.x-5.0.config
