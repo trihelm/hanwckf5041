@@ -34,6 +34,8 @@ jobs:
         cp $GITHUB_WORKSPACE/Shadowsocks.asp /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/Shadowsocks.asp
         #cp $GITHUB_WORKSPACE/general.js /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/general.js
         cp -r $GITHUB_WORKSPACE/v2m /opt/rt-n56u/xray
+        cp -rf $GITHUB_WORKSPACE/build_firmware_modify /opt/rt-n56u/trunk/build_firmware_modify
+
         
         sh /opt/rt-n56u/trunk/tools/shellcheck.sh
         cd /opt/rt-n56u/toolchain-mipsel
