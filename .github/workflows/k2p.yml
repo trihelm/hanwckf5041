@@ -76,7 +76,7 @@ jobs:
 
         cd /opt/rt-n56u/trunk
         curl --create-dirs -L https://golang.google.cn/dl/go1.15.2.linux-amd64.tar.gz -o /opt/rt-n56u/trunk/tools/go/go1.15.2.linux-amd64.tar.gz
-        #cp -f configs/templates/$TNAME.config .config
+        cp -f configs/templates/$TNAME.config .config
         #########################################################################################        
         
         mkdir -p /opt/images/
