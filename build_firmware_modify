@@ -6,6 +6,7 @@ if [ -z "$1" ] || [ "$EUID" != 0 ]; then
 	exit 1
 fi
 if [ -z "$2" ];then
+if
 if [ ! -f configs/templates/$1.config ] ; then
 	echo "configs/templates/$1.config not found!"
 	exit 1
@@ -103,7 +104,7 @@ echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config #frps
 echo "CONFIG_FIRMWARE_INCLUDE_NPC=n" >> .config #npc
 ##内网穿透服务##
 
-fi
+#fi
 sed -i 's/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y/g' .config
 ROOTDIR=`pwd`
 export ROOTDIR=$ROOTDIR
