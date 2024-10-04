@@ -25,7 +25,10 @@ jobs:
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev gcc-multilib libev-dev
     - name: Clone source code
       run: |
-        git clone --depth=1 https://github.com/fightroad/Padavan-KVR.git /opt/rt-n56u        
+        git clone --depth=1 https://github.com/fightroad/Padavan-KVR.git /opt/rt-n56u
+        echo "CONFIG_32M_REBOOT_FIXUP=y" >> /opt/rt-n56u/trunk/configs/templates/K2P-USB.config
+
+        
         #rm -rf /opt/rt-n56u/trunk/user/shadowsocks/ss/gentrojanconfig.lua
         #cp $GITHUB_WORKSPACE/gentrojanconfig.lua /opt/rt-n56u/trunk/user/shadowsocks/ss/gentrojanconfig.lua
         #cp $GITHUB_WORKSPACE/shadowsocks.sh /opt/rt-n56u/trunk/user/shadowsocks/scripts/shadowsocks.sh
@@ -49,7 +52,7 @@ jobs:
         fi
 
         #########################################################################################
-        #基础模板
+        #基础模板   修改机型配置文件
         cd /opt/rt-n56u/trunk/configs/templates  
         sed -i '/CONFIG_FIRMWARE_INCLUDE_UVC/d' $TNAME.config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_AUDIO/d' $TNAME.config
@@ -104,9 +107,12 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_CIFS=y" >> $TNAME.config
 
         #########################################################################################
-        #编译文件modify
+
         cd /opt/rt-n56u/trunk
         cp -f configs/templates/$TNAME.config .config
+
+        #编译文件modify
+        ##只有在编译的时候只带机型才会起作用，action脚本里编译增加了第2个参数的，modify内容不起作用。
         sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config/d' build_firmware_modify
         sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=y" >> .config/d' build_firmware_modify
         sed -i '/echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=y" >> .config/d' build_firmware_modify
