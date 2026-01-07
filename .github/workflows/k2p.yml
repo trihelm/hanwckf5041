@@ -26,14 +26,14 @@ jobs:
     - name: Clone source code
       run: |
         git clone --depth=1 https://github.com/etion2008/rt-n56u.git /opt/rt-n56u        
-        rm -rf /opt/rt-n56u/trunk/user/shadowsocks/ss/gentrojanconfig.lua
-        cp $GITHUB_WORKSPACE/gentrojanconfig.lua /opt/rt-n56u/trunk/user/shadowsocks/ss/gentrojanconfig.lua
-        cp $GITHUB_WORKSPACE/shadowsocks.sh /opt/rt-n56u/trunk/user/shadowsocks/scripts/shadowsocks.sh
-        cp $GITHUB_WORKSPACE/dlink.lua /opt/rt-n56u/trunk/user/shadowsocks/ss/dlink.lua
-        cp $GITHUB_WORKSPACE/v2m /opt/rt-n56u/trunk/user/v2ray/Makefile
-        cp $GITHUB_WORKSPACE/Shadowsocks.asp /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/Shadowsocks.asp
+        #rm -rf /opt/rt-n56u/trunk/user/shadowsocks/ss/gentrojanconfig.lua
+        #cp $GITHUB_WORKSPACE/gentrojanconfig.lua /opt/rt-n56u/trunk/user/shadowsocks/ss/gentrojanconfig.lua
+        #cp $GITHUB_WORKSPACE/shadowsocks.sh /opt/rt-n56u/trunk/user/shadowsocks/scripts/shadowsocks.sh
+        #cp $GITHUB_WORKSPACE/dlink.lua /opt/rt-n56u/trunk/user/shadowsocks/ss/dlink.lua
+        #cp $GITHUB_WORKSPACE/v2m /opt/rt-n56u/trunk/user/v2ray/Makefile
+        #cp $GITHUB_WORKSPACE/Shadowsocks.asp /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/Shadowsocks.asp
         #cp $GITHUB_WORKSPACE/general.js /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/general.js
-        cp -r $GITHUB_WORKSPACE/v2m /opt/rt-n56u/xray
+        #cp -r $GITHUB_WORKSPACE/v2m /opt/rt-n56u/xray
         
         sh /opt/rt-n56u/trunk/tools/shellcheck.sh
         cd /opt/rt-n56u/toolchain-mipsel
