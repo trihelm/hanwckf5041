@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
     - name: Checkout
@@ -21,20 +21,20 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd \
-        cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
+        cpio git python3-docutils gettext automake autopoint texinfo build-essential help2man \
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev gcc-multilib libev-dev
     - name: Clone source code
       run: |
         git clone --depth=1 https://github.com/etion2008/rt-n56u.git /opt/rt-n56u        
-        rm -rf /opt/rt-n56u/trunk/user/shadowsocks/ss/gentrojanconfig.lua
-        cp $GITHUB_WORKSPACE/gentrojanconfig.lua /opt/rt-n56u/trunk/user/shadowsocks/ss/gentrojanconfig.lua
-        cp $GITHUB_WORKSPACE/shadowsocks.sh /opt/rt-n56u/trunk/user/shadowsocks/scripts/shadowsocks.sh
-        cp $GITHUB_WORKSPACE/dlink.lua /opt/rt-n56u/trunk/user/shadowsocks/ss/dlink.lua
-        cp $GITHUB_WORKSPACE/v2m /opt/rt-n56u/trunk/user/v2ray/Makefile
-        cp $GITHUB_WORKSPACE/Shadowsocks.asp /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/Shadowsocks.asp
+        #rm -rf /opt/rt-n56u/trunk/user/shadowsocks/ss/gentrojanconfig.lua
+        #rm -rf /opt/rt-n56u/trunk/user/shadowsocks/ss/gentrojanconfig.luar/shadowsocks/ss/gentrojanconfig.lua
+        #cp $GITHUB_WORKSPACE/shadowsocks.sh /opt/rt-n56u/trunk/user/shadowsocks/scripts/shadowsocks.sh
+        #cp $GITHUB_WORKSPACE/dlink.lua /opt/rt-n56u/trunk/user/shadowsocks/ss/dlink.lua
+        #cp $GITHUB_WORKSPACE/v2m /opt/rt-n56u/trunk/user/v2ray/Makefile
+        #cp $GITHUB_WORKSPACE/Shadowsocks.asp /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/Shadowsocks.asp
         #cp $GITHUB_WORKSPACE/general.js /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/general.js
-        cp -r $GITHUB_WORKSPACE/v2m /opt/rt-n56u/xray
-        cp -rf $GITHUB_WORKSPACE/build_firmware_modify /opt/rt-n56u/trunk/build_firmware_modify
+        #cp -r $GITHUB_WORKSPACE/v2m /opt/rt-n56u/xray
+        #cp -rf $GITHUB_WORKSPACE/build_firmware_modify /opt/rt-n56u/trunk/build_firmware_modify
 
         
         sh /opt/rt-n56u/trunk/tools/shellcheck.sh
@@ -42,7 +42,7 @@ jobs:
         sh dl_toolchain.sh
     - name: Build Firmware
       env:
-        TNAME: K2P
+        TNAME: K2P_nano
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
