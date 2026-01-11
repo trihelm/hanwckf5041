@@ -33,6 +33,9 @@ jobs:
         sh /opt/rt-n56u/trunk/tools/shellcheck.sh
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
+        cd /opt/rt-n56u/trunk/tools/go
+        rm -f go1.15.2.linux-amd64.tar.gz
+        wget https://mirrors.ustc.edu.cn/golang/go1.15.2.linux-amd64.tar.gz
     - name: Build Firmware
       env:
         TNAME: YK-L1
