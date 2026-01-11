@@ -30,12 +30,22 @@ jobs:
     - name: Clone source code
       run: |
         git clone --depth=1 https://github.com/etion2008/rt-n56u.git /opt/rt-n56u        
+        #rm -rf /opt/rt-n56u/trunk/user/shadowsocks/ss/gentrojanconfig.lua
+        #rm -rf /opt/rt-n56u/trunk/user/shadowsocks/ss/gentrojanconfig.luar/shadowsocks/ss/gentrojanconfig.lua
+        #cp $GITHUB_WORKSPACE/shadowsocks.sh /opt/rt-n56u/trunk/user/shadowsocks/scripts/shadowsocks.sh
+        #cp $GITHUB_WORKSPACE/dlink.lua /opt/rt-n56u/trunk/user/shadowsocks/ss/dlink.lua
+        #cp $GITHUB_WORKSPACE/v2m /opt/rt-n56u/trunk/user/v2ray/Makefile
+        #cp $GITHUB_WORKSPACE/Shadowsocks.asp /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/Shadowsocks.asp
+        #cp $GITHUB_WORKSPACE/general.js /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/general.js
+        #cp -r $GITHUB_WORKSPACE/v2m /opt/rt-n56u/xray
+        #cp -rf $GITHUB_WORKSPACE/build_firmware_modify /opt/rt-n56u/trunk/build_firmware_modify
+
+        
         sh /opt/rt-n56u/trunk/tools/shellcheck.sh
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
-        cd /opt/rt-n56u/trunk/tools/go
         #rm -f go1.15.2.linux-amd64.tar.gz
-        wget https://mirrors.ustc.edu.cn/golang/go1.15.2.linux-amd64.tar.gz
+        #wget https://mirrors.ustc.edu.cn/golang/go1.15.2.linux-amd64.tar.gz
     - name: Build Firmware
       env:
         TNAME: YK-L1
