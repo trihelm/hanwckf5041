@@ -47,7 +47,8 @@ jobs:
         mkdir -p /opt/rt-n56u/trunk/tools/go
         cd /opt/rt-n56u/trunk/tools/go
         #rm -f go1.15.2.linux-amd64.tar.gz
-        curl -O https://mirrors.ustc.edu.cn/golang/go1.15.2.linux-amd64.tar.gz
+        #curl -O https://mirrors.ustc.edu.cn/golang/go1.15.2.linux-amd64.tar.gz
+        curl --create-dirs -L https://mirrors.ustc.edu.cn/golang/go1.15.2.linux-amd64.tar.gz -o /opt/rt-n56u/trunk/tools/go/go1.15.2.linux-amd64.tar.gz
     - name: Build Firmware
       env:
         TNAME: YK-L1
