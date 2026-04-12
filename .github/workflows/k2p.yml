@@ -25,7 +25,7 @@ jobs:
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev gcc-multilib libev-dev
     - name: Clone source code
       run: |
-        git clone --depth=1 https://github.com/etion2008/rt-n56u.git /opt/rt-n56u        
+        git clone --depth=1 https://github.com/keke1023/Padavan /opt/rt-n56u        
         #rm -rf /opt/rt-n56u/trunk/user/shadowsocks/ss/gentrojanconfig.lua
         #rm -rf /opt/rt-n56u/trunk/user/shadowsocks/ss/gentrojanconfig.luar/shadowsocks/ss/gentrojanconfig.lua
         #cp $GITHUB_WORKSPACE/shadowsocks.sh /opt/rt-n56u/trunk/user/shadowsocks/scripts/shadowsocks.sh
